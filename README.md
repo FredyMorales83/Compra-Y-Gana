@@ -1,6 +1,6 @@
 # Compra-Y-Gana
 
-Software para uso propio, programado en C# utilizando WinForms, Base de datos SQL Server y Entity Framework
+Software para uso propio, programado en C# utilizando WinForms, Base de datos MySql y Entity Framework
 
 El objetivo principal de mi aplicación es otorgar a mis clientes con cada compra un porcentaje de la misma en puntos (comúnmente 20% del 
 monto) los cuales se irán acumulando, llevando un registro de los montos de las compras realizadas únicamente, una vez realizado esto los 
