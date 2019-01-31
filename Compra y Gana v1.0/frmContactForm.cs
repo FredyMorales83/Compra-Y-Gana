@@ -34,7 +34,7 @@ namespace Compra_y_Gana_v1._0
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, $"Error del sistema {ex.GetType().ToString()}", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(ex.Message, $"Error del sistema {ex.GetType().Name}", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }  
         }
     }

@@ -11,15 +11,24 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    [DbConfigurationType(typeof(MySqlEFConfiguration))]
+    //Descomentar para utilizar con bases de datos MySql
+    //[DbConfigurationType(typeof(MySqlEFConfiguration))]
     public class LoyaltyDB : DbContext
     {
-        //public LoyaltyDB() : base(GetConnectionString("compummc_loyaltydb", "CloudDB"))//Descomentar para usar BD en la nube
+        //Descomentar para usar BD MySql en la nube, requiere configurar la cadena de conexion con sus datos
+        //public LoyaltyDB() : base(GetConnectionString("compummc_loyaltydb", "CloudDB"))
         //{
         //    Database.SetInitializer(new LoyaltyDBInitializer());
         //}
 
-        public LoyaltyDB() : base(GetConnectionString("LoyaltyDB", "LocalDB"))//Descomentar para usar BD local de pruebas
+        //Descomentar para usar BD MySql local de pruebas
+        //public LoyaltyDB() : base(GetConnectionString("LoyaltyDB", "LocalDB"))
+        //{
+        //    Database.SetInitializer(new LoyaltyDBInitializer());
+        //}
+
+        //Descomentar para usar BD SQL Server local de pruebas
+        public LoyaltyDB() : base("LoyaltyDB")
         {
             Database.SetInitializer(new LoyaltyDBInitializer());
         }
