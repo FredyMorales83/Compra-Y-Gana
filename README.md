@@ -9,15 +9,12 @@ a cada punto en el módulo de configuración) y el cual podrán utilizar en el m
 
 IDEAS PENDIENTES DE IMPLEMENTAR
 
-* Generar estado de cuenta en formato PDF y poder enviarlo por correo electrónico, entregarlo impreso al cliente o en otro enviarlo por
-Whatsapp (Cosa que por mi nivel supongo ha de ser díficil de implementar).
+* Generar estado de cuenta en formato PDF y poder enviarlo por correo electrónico, entregarlo impreso al cliente o en otro caso enviarlo por Whatsapp (Cosa que por mi nivel supongo ha de ser díficil de implementar).
 
 * Agregar un modulo de generar tarjetas personalizadas con código de barra y asi imprimir una tarjeta a cada cliente con el cual ya no sea
 necesario buscar por sus datos personales y solo con escanear dicho código aparezca la información de dicho cliente.
 
 
-ERRORES DETECTADOS Y AUN NO CORREGIDOS
+ERRORES CORREGIDOS
 
-* Al hacer una prueba en este mes de enero, en el apartado de estado de cuenta, lanza una excepción no controlada al elegir como periodo
-para ver movimientos del mes anterior, esto debido a los indices en la función para obtener dicho mes anterior y con el cambio de año actual
-y mes anterior del año anterior, espero resolverlo pronto
+* Error corregido que sucedía en el apartado de estado de cuenta y ser el primer mer del año, lanzaba una excepción no controlada al elegir como periodo para ver movimientos el mes anterior, esto debido a los indices en la función para obtener dicho mes anterior, modifiqué la función que obtiene las transacciones de cierto mes, poniendo como parámetro adicional el año del periodo como tipo entero nullable, esto con la finalidad de que en el evento que selecciona periodo actual o anterior, si el mes en curso es Enero, seteo como mes del periodo el mes de diciembre y como año de periodo el año actual menos 1 y asi traer las transacciones correctamente del periodo anterior.
