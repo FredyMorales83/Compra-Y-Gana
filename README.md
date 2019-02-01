@@ -1,11 +1,11 @@
 # Compra-Y-Gana
 
-Software para uso propio, programado en C# utilizando WinForms, Base de datos MySql y Entity Framework
+Software para uso propio, programado en C# utilizando WinForms, Base de datos SQL Server y Entity Framework, con la opción en el mismo proyecto de poder utilizar como base de datos MySql, realizando para esto unas pequeñas modificaciones en el archivo LoyaltyDB descomentando y comentando unas lineas de código y configurando en el archivo app.config de la capa de presentación sus datos en la cadena de conexión para su gestor de datos MySql.
 
-El objetivo principal de mi aplicación es otorgar a mis clientes con cada compra un porcentaje de la misma en puntos (comúnmente 20% del 
-monto) los cuales se irán acumulando, llevando un registro de los montos de las compras realizadas únicamente, una vez realizado esto los 
+El objetivo principal de mi aplicación es otorgar a mis clientes con cada compra un porcentaje de la misma en puntos (inicialmente 10% del 
+monto de compra) los cuales se irán acumulando, llevando un registro de los montos de las compras realizadas únicamente, una vez realizado esto los 
 clientes pueden pedir ver su total de puntos acumulados y su equivalente en dinero electrónico (obtenido con el valor asignado en centavos 
-a cada punto en el módulo de configuración) y el cual podrán utilizar en el mismo negocio para realizar compras.
+a cada punto en el módulo de configuración que de inicio es 10 centavos por punto) y el cual podrán utilizar en el mismo negocio para realizar compras.
 
 IDEAS PENDIENTES DE IMPLEMENTAR
 
