@@ -34,11 +34,11 @@ namespace Compra_y_Gana_v1._0
             txtCurrentMonth.Text = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(DateTime.Now.Month);
         }
 
-        private void GetAccountTransactionsByPeriod(int MonthPeriod)
+        private void GetAccountTransactionsByPeriod(int MonthPeriod, int? YearPeriod)
         {
             try
             {
-                ICollection<Transaction> transactions = BLL.TransactionServices.GetAccountTransactions(customer.CustomerID, MonthPeriod);
+                ICollection<Transaction> transactions = BLL.TransactionServices.GetAccountTransactions(customer.CustomerID, MonthPeriod, YearPeriod);
 
                 var movements = from t in transactions select new TransactionViewModel { ID = t.TransactionID, Fecha = t.TransactionDate, Descripcion =  t.Description, Transaccion = TranslateTransactionType(t.TransactionType), Monto = t.Amount.ToString("C2"), Notas = t.Notes };
 
@@ -72,17 +72,34 @@ namespace Compra_y_Gana_v1._0
 
         private void cbPeriod_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cbxPeriod.SelectedIndex == 0)
+            try
             {
-                MonthPeriod = DateTime.Now.Month;
-                GetAccountTransactionsByPeriod(MonthPeriod);
-                txtPeriodo.Text = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(DateTime.Now.Month);
+                if (cbxPeriod.SelectedIndex == 0)
+                {
+                    MonthPeriod = DateTime.Now.Month;
+                    GetAccountTransactionsByPeriod(MonthPeriod, null);
+                    txtPeriodo.Text = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(DateTime.Now.Month);
+                }
+                else
+                {
+                    //Condicion para corregir excepcion lanzada en cambio de año y elegir periodo anterior
+                    if (DateTime.Now.Month == 1)
+                    {
+                        MonthPeriod = 12;
+                        txtPeriodo.Text = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(MonthPeriod);
+                        GetAccountTransactionsByPeriod(MonthPeriod, DateTime.Now.Year - 1);
+                    }
+                    else
+                    {
+                        MonthPeriod = DateTime.Now.Month - 1;
+                        txtPeriodo.Text = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(MonthPeriod);
+                        GetAccountTransactionsByPeriod(MonthPeriod, null);
+                    }
+                }
             }
-            else
+            catch (IndexOutOfRangeException ex)
             {
-                MonthPeriod = DateTime.Now.Month - 1;
-                GetAccountTransactionsByPeriod(MonthPeriod);
-                txtPeriodo.Text = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(DateTime.Now.Month - 1);
+                MessageBox.Show(ex.Message, $"Error del sistema {ex.GetType().Name}", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

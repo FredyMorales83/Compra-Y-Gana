@@ -19,11 +19,16 @@ namespace BLL
             }
         }
 
-        public static ICollection<Transaction> GetAccountTransactions(int customerID, int MonthPeriod)
+        public static ICollection<Transaction> GetAccountTransactions(int customerID, int MonthPeriod, int? YearPeriod)
         {
+            if (!YearPeriod.HasValue)
+            {
+                YearPeriod = DateTime.Now.Year;
+            }
+
             using (LoyaltyDB db = new LoyaltyDB())
             {
-                return db.Transactions.Where(c => c.CustomerID == customerID).Where(t => t.TransactionDate.Month == MonthPeriod).ToList();
+                return db.Transactions.Where(c => c.CustomerID == customerID).Where(t => t.TransactionDate.Month == MonthPeriod && t.TransactionDate.Year == YearPeriod).ToList();
             }
         }
 
