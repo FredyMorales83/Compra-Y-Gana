@@ -43,7 +43,7 @@ namespace Compra_y_Gana_v1._0
             txtNotes.ReadOnly = true;
             nudAmount.Value = transaction.Amount;
             nudAmount.ReadOnly = true;
-            txtTransactionDate.Text = transaction.TransactionDate.ToLongTimeString();
+            txtTransactionDate.Text = transaction.TransactionDate.ToString();
             cbxTransactionType.SelectedIndex = (int)transaction.TransactionType;
             lblPointsInformation.Visible = false;
             btnSaveTransaction.Visible = false;
