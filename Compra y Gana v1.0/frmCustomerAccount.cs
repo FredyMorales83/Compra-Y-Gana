@@ -34,11 +34,11 @@ namespace Compra_y_Gana_v1._0
             txtCurrentMonth.Text = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(DateTime.Now.Month);
         }
 
-        private void GetAccountTransactionsByPeriod(int MonthPeriod, int? YearPeriod)
+        private void GetAccountTransactionsByPeriod(DateTime date)
         {
             try
             {
-                ICollection<Transaction> transactions = BLL.TransactionServices.GetAccountTransactions(customer.CustomerID, MonthPeriod, YearPeriod);
+                ICollection<Transaction> transactions = BLL.TransactionServices.GetAccountTransactions(customer.CustomerID, date);
 
                 var movements = from t in transactions select new TransactionViewModel { ID = t.TransactionID, Fecha = t.TransactionDate, Descripcion =  t.Description, Transaccion = TranslateTransactionType(t.TransactionType), Monto = t.Amount.ToString("C2"), Notas = t.Notes };
 
@@ -76,25 +76,15 @@ namespace Compra_y_Gana_v1._0
             {
                 if (cbxPeriod.SelectedIndex == 0)
                 {
-                    MonthPeriod = DateTime.Now.Month;
-                    GetAccountTransactionsByPeriod(MonthPeriod, null);
+                    GetAccountTransactionsByPeriod(DateTime.Now);
                     txtPeriodo.Text = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(DateTime.Now.Month);
                 }
                 else
                 {
                     //Condicion para corregir excepcion lanzada en cambio de año y elegir periodo anterior
-                    if (DateTime.Now.Month == 1)
-                    {
-                        MonthPeriod = 12;
-                        txtPeriodo.Text = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(MonthPeriod);
-                        GetAccountTransactionsByPeriod(MonthPeriod, DateTime.Now.Year - 1);
-                    }
-                    else
-                    {
-                        MonthPeriod = DateTime.Now.Month - 1;
-                        txtPeriodo.Text = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(MonthPeriod);
-                        GetAccountTransactionsByPeriod(MonthPeriod, null);
-                    }
+                    MonthPeriod = DateTime.Now.AddMonths(-1).Month;
+                    txtPeriodo.Text = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(MonthPeriod);
+                    GetAccountTransactionsByPeriod(DateTime.Now.AddMonths(-1));
                 }
             }
             catch (IndexOutOfRangeException ex)
