@@ -28,10 +28,16 @@ namespace DAL
         //}
 
         //Descomentar para usar BD SQL Server local de pruebas
-        public LoyaltyDB() : base("LoyaltyDB")
+        public LoyaltyDB() : base("MSCloudDB")
         {
             Database.SetInitializer(new LoyaltyDBInitializer());
         }
+
+        ////Descomentar para usar BD SQL Server local de pruebas
+        //public LoyaltyDB() : base("LoyaltyDB")
+        //{
+        //    Database.SetInitializer(new LoyaltyDBInitializer());
+        //}
 
         public DbSet<User> Users { get; set; }
         public DbSet<Customer> Customers { get; set; }
