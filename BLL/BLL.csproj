@@ -53,7 +53,7 @@
     <Compile Include="CustomerServices.cs" />
     <Compile Include="RegexUtilities.cs" />
     <Compile Include="TransactionServices.cs" />
-    <Compile Include="UserServices.cs" />
+    <Compile Include="ManagerServices.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

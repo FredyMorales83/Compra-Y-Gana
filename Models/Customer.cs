@@ -8,37 +8,11 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    public class Customer : SharedBase
+    public class Customer : EntityBase
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int CustomerID { get; set; }
-
-        [Required]
-        [MaxLength(50)]
-        public string Names { get; set; }
-
-        [Required]
-        [MaxLength(50)]
-        public string PaternalLastname { get; set; }
-
-        [MaxLength(50)]
-        public string MaternalLastname { get; set; }
-
-        [StringLength(300, ErrorMessage = "La longitud máxima de la dirección son de {0} caracteres")]
-        public string Address { get; set; }
-
-        [MaxLength(10)]
-        public string Phone { get; set; }
-        
-        [MaxLength(10)]
-        public string Cellphone { get; set; }
-        
-        [StringLength(50, ErrorMessage = "Longitud máxima del correo debe es {0} caracteres")]
-        public string Email { get; set; }
-
-        [MaxLength(100)]
-        public string Nickname { get; set; }
+        public int CustomerID { get; set; }        
 
         [MinLength(5,ErrorMessage = "Nombre de usuario demasiado corto, longitud mínima {0} caracteres")]
         [MaxLength(100), Index(IsUnique = true)]
@@ -49,9 +23,11 @@ namespace Models
 
         public virtual Account Account { get; set; }
 
+        public Login Login { get; set; }
+
         public override string ToString()
         {
-            return string.Format($"{Names} {PaternalLastname} {MaternalLastname}");
+            return string.Format($"{Name} {PaternalLastname} {MaternalLastname}");
         }
     }
 }

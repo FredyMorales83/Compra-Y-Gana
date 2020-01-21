@@ -37,7 +37,7 @@ namespace Models
         [DataType(DataType.Currency)]
         public decimal Amount { get; set; }
 
-        public virtual User User { get; set; }
+        public virtual Manager User { get; set; }
 
         public virtual Account Account { get; set; }
     }

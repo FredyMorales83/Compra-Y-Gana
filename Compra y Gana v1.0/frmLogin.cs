@@ -64,12 +64,12 @@ namespace Compra_y_Gana_v1._0
             {
                 try
                 {
-                    var UserExists = BLL.UserServices.GetUserLogin(txtUsuario.Text.Trim(), txtPassword.Text.Trim());
+                    var managerExists = BLL.ManagerServices.GetManagerLogin(txtUsuario.Text.Trim(), txtPassword.Text.Trim());
 
-                    if (UserExists != null)
+                    if (managerExists != null)
                     {
                         MessageBox.Show("Bienvenido al sistema", "Autenticación exitosa", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                        Properties.Settings.Default.UserID = UserExists.UserID;
+                        Properties.Settings.Default.UserID = managerExists.ManagerID;
                         this.Close();
                     }
                     else
@@ -112,7 +112,10 @@ namespace Compra_y_Gana_v1._0
 
         private void txtPassword_KeyDown(object sender, KeyEventArgs e)
         {
-            btnLogin_Click(sender, e);
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnLogin_Click(sender, e);
+            }
         }
 
         private void frmLogin_FormClosing(object sender, FormClosingEventArgs e)

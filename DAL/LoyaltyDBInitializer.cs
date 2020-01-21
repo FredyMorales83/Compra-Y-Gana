@@ -12,17 +12,18 @@ namespace DAL
     {
         protected override void Seed(LoyaltyDB db)
         {
-            User user = new User
+            Manager manager = new Manager
             {
-                Alias = "Admistrador predeterminado",
+                Nickname = "Admistrador predeterminado",
                 Email = "correo@dominio.com",
                 Name = "Administrador",
                 PaternalLastname = "Predeterminado",
                 Username = "admin",
-                Password = "1234"
+                Password = "1234",
+                Login = new Login { Username = "admin", Password = "1234" }
             };
 
-            db.Users.Add(user);
+            db.Managers.Add(manager);
             db.SaveChanges();
 
             ApplicationSetting setting = new ApplicationSetting

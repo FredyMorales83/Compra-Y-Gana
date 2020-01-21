@@ -14,8 +14,8 @@ namespace Compra_y_Gana_v1._0
     public partial class frmApplicationSettings : Form
     {
         public int UserLoguedID { get; set; }
-        private User user;
-        private ApplicationSetting setting;
+        private Manager _manager;
+        private ApplicationSetting _setting;
 
         public frmApplicationSettings()
         {
@@ -26,10 +26,10 @@ namespace Compra_y_Gana_v1._0
         {
             try
             {
-                setting = BLL.ApplicationSettingServices.GetDefaultApplicationSetting();
-                FillTextBoxSince(setting);
-                user = BLL.UserServices.GetUserById(UserLoguedID);
-                FillTextBoxSince(user);
+                _setting = BLL.ApplicationSettingServices.GetDefaultApplicationSetting();
+                FillTextBoxSince(_setting);
+                _manager = BLL.ManagerServices.GetManagerById(UserLoguedID);
+                FillTextBoxSince(_manager);
             }
             catch (Exception ex)
             {
@@ -47,13 +47,13 @@ namespace Compra_y_Gana_v1._0
 
         private void btnUpdateApplicationSettings_Click(object sender, EventArgs e)
         {
-            AssignDataFromTextBox(setting);
+            AssignDataFromTextBox(_setting);
             try
             {
-                BLL.ApplicationSettingServices.Update(setting);
-                Properties.Settings.Default.PercentagePoints = setting.PercentagePoints;
-                Properties.Settings.Default.PointValueCash = setting.PointValueCash;
-                Properties.Settings.Default.AllowCashRequest = setting.AllowCashRequest;
+                BLL.ApplicationSettingServices.Update(_setting);
+                Properties.Settings.Default.PercentagePoints = _setting.PercentagePoints;
+                Properties.Settings.Default.PointValueCash = _setting.PointValueCash;
+                Properties.Settings.Default.AllowCashRequest = _setting.AllowCashRequest;
                 MessageBox.Show("Configuración actualizada satisfactoriamente", "Mensaje del sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
@@ -69,10 +69,12 @@ namespace Compra_y_Gana_v1._0
 
         private void btnUpdateUser_Click(object sender, EventArgs e)
         {
-            AssignDataFromTextBox(user);
+            _manager = BLL.ManagerServices.GetManagerById(UserLoguedID);
+
+            AssignDataFromTextBox(_manager);
             try
             {
-                BLL.UserServices.Update(user);
+                BLL.ManagerServices.Update(_manager);
                 MessageBox.Show("Usuario actualizado satisfactoriamente", "Mensaje del sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
@@ -82,30 +84,30 @@ namespace Compra_y_Gana_v1._0
         }
 
         #region Get and Set Business and User Information
-        private void AssignDataFromTextBox(User user)
+        private void AssignDataFromTextBox(Manager manager)
         {
-            user.Address = txtAddress.Text;
-            user.Cellphone = txtCellphone.Text;
-            user.Email = txtEmail.Text;
-            user.MaternalLastname = txtMaternalLastname.Text;
-            user.Name = txtName.Text;
-            user.Password = txtPassword.Text;
-            user.PaternalLastname = txtPaternalLastname.Text;
-            user.Phone = txtPhone.Text;
-            user.Username = txtUsername.Text;
+            manager.Address = txtAddress.Text;
+            manager.Cellphone = txtCellphone.Text;
+            manager.Email = txtEmail.Text;
+            manager.MaternalLastname = txtMaternalLastname.Text;
+            manager.Name = txtName.Text;
+            manager.PaternalLastname = txtPaternalLastname.Text;
+            manager.Phone = txtPhone.Text;
+            manager.Login.Username = txtUsername.Text;
+            manager.Login.Password = txtPassword.Text;
         }
 
-        private void FillTextBoxSince(User user)
+        private void FillTextBoxSince(Manager manager)
         {
-            txtAddress.Text = user.Address;
-            txtCellphone.Text = user.Cellphone;
-            txtEmail.Text = user.Email;
-            txtMaternalLastname.Text = user.MaternalLastname;
-            txtName.Text = user.Name;
-            txtPassword.Text = user.Password;
-            txtPaternalLastname.Text = user.PaternalLastname;
-            txtPhone.Text = user.Phone;
-            txtUsername.Text = user.Username;
+            txtAddress.Text = manager.Address;
+            txtCellphone.Text = manager.Cellphone;
+            txtEmail.Text = manager.Email;
+            txtMaternalLastname.Text = manager.MaternalLastname;
+            txtName.Text = manager.Name;
+            txtPassword.Text = manager.Login.Password;
+            txtPaternalLastname.Text = manager.PaternalLastname;
+            txtPhone.Text = manager.Phone;
+            txtUsername.Text = manager.Login.Username;
         }
 
         private void AssignDataFromTextBox(ApplicationSetting setting)

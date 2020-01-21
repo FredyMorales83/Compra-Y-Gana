@@ -21,12 +21,13 @@ namespace BLL
                     Cellphone = Celular,
                     Email = Correo,
                     MaternalLastname = ApellidoMaterno,
-                    Names = Nombre,
+                    Name = Nombre,
                     Username = Usuario,
                     Password = Contrasena,
                     PaternalLastname = ApellidoPaterno,
                     Phone = Telefono,
-                    CreatedDate = DateTime.Now
+                    CreatedDate = DateTime.Now,
+                    Login = new Login { Username = Usuario, Password = Contrasena }
                 });
             }
         }
@@ -96,12 +97,29 @@ namespace BLL
             }
         }
 
+        public static bool NicknameExists(string nickname)
+        {
+            using (LoyaltyDB db = new LoyaltyDB())
+            {
+                var customer = db.Customers.Where(u => u.Nickname == nickname).SingleOrDefault();
+
+                if (customer != null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+
         public static List<Customer> FindByCustomerData(string text)
         {
             using (LoyaltyDB db = new LoyaltyDB())
             {
-                return db.Customers.Where(x => x.Names.Contains(text) || x.PaternalLastname.Contains(text) || x.MaternalLastname.Contains(text) 
-                || x.Phone.Contains(text) || x.Cellphone.Contains(text) || x.Email.Contains(text)).ToList();
+                return db.Customers.Where(x => x.Name.Contains(text) || x.PaternalLastname.Contains(text) || x.MaternalLastname.Contains(text) 
+                || x.Phone.Contains(text) || x.Cellphone.Contains(text) || x.Email.Contains(text) || x.Nickname.Contains(text)).ToList();
             }
         }
     }

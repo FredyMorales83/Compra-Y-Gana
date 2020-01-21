@@ -20,12 +20,14 @@ namespace Compra_y_Gana_v1._0
         public frmNewOrUpdateCustomer()
         {
             InitializeComponent();
+            IsNewCustomer = true;
         }
 
         public frmNewOrUpdateCustomer(Customer customer)
         {
             InitializeComponent();
             this.customer = customer;
+            IsNewCustomer = false;
             FillTextBoxSince(customer);
             txtUsername.ReadOnly = true;
         }        
@@ -65,6 +67,7 @@ namespace Compra_y_Gana_v1._0
                 }
                 catch (Exception ex)
                 {
+                    //throw;
                     MessageBox.Show(ex.Message);
                 }
             }
@@ -80,6 +83,7 @@ namespace Compra_y_Gana_v1._0
                 }
                 catch (Exception ex)
                 {
+                    //throw;
                     MessageBox.Show(ex.Message);
                 }
             }
@@ -126,6 +130,24 @@ namespace Compra_y_Gana_v1._0
             }
             errorProvider1.SetError(txtUsername, "");
 
+            if (!string.IsNullOrEmpty(txtNickname.Text))
+            {
+                if (BLL.CustomerServices.NicknameExists(txtNickname.Text) && IsNewCustomer)
+                {
+                    errorProvider1.SetError(txtNickname, "El alias ya existe, elija uno diferente");
+                    txtNickname.Focus();
+                    return false;
+                }
+
+                if (!IsNewCustomer && !customer.Nickname.Equals(txtNickname.Text) && BLL.CustomerServices.NicknameExists(txtNickname.Text))
+                {
+                    errorProvider1.SetError(txtNickname, "El alias ya existe, elija uno diferente");
+                    txtNickname.Focus();
+                    return false;
+                }
+                errorProvider1.SetError(txtNickname, ""); 
+            }
+
             if (string.IsNullOrEmpty(txtPassword.Text))
             {
                 errorProvider1.SetError(txtPassword, "Debe ingresar una contraseña");
@@ -165,12 +187,13 @@ namespace Compra_y_Gana_v1._0
             customer.Cellphone = txtCellphone.Text;
             customer.Email = txtEmail.Text;
             customer.MaternalLastname = txtMaternalLastname.Text;
-            customer.Names = txtName.Text;
+            customer.Name = txtName.Text;
             customer.Nickname = txtNickname.Text;
-            customer.Password = txtPassword.Text;
             customer.PaternalLastname = txtPaternalLastname.Text;
             customer.Phone = txtPhone.Text;
             customer.Username = txtUsername.Text;
+            customer.Password = txtPassword.Text;
+            customer.Login = new Login { Username = txtUsername.Text, Password =  txtPassword.Text};
         }
 
         private void FillTextBoxSince(Customer customer)
@@ -179,7 +202,7 @@ namespace Compra_y_Gana_v1._0
             txtCellphone.Text = customer.Cellphone;
             txtEmail.Text = customer.Email;
             txtMaternalLastname.Text = customer.MaternalLastname;
-            txtName.Text = customer.Names;
+            txtName.Text = customer.Name;
             txtNickname.Text = customer.Nickname;
             txtPassword.Text = customer.Password;
             txtPaternalLastname.Text = customer.PaternalLastname;

@@ -35,8 +35,20 @@
             this.btnFind = new System.Windows.Forms.Button();
             this.gbList = new System.Windows.Forms.GroupBox();
             this.dgvCustomers = new System.Windows.Forms.DataGridView();
+            this.btnViewAccount = new System.Windows.Forms.Button();
+            this.btnNew = new System.Windows.Forms.Button();
+            this.btnEdit = new System.Windows.Forms.Button();
+            this.btnClose = new System.Windows.Forms.Button();
+            this.gbAcciones = new System.Windows.Forms.GroupBox();
+            this.gbxTransactions = new System.Windows.Forms.GroupBox();
+            this.btnAdjustment = new System.Windows.Forms.Button();
+            this.btnWithdrawal = new System.Windows.Forms.Button();
+            this.btnExpense = new System.Windows.Forms.Button();
+            this.btnPurchase = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.CustomerID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Names = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Login = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PaternalLastname = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MaternalLastname = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Address = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -49,17 +61,6 @@
             this.Account = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CreatedDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ModifiedDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnViewAccount = new System.Windows.Forms.Button();
-            this.btnNew = new System.Windows.Forms.Button();
-            this.btnEdit = new System.Windows.Forms.Button();
-            this.btnClose = new System.Windows.Forms.Button();
-            this.gbAcciones = new System.Windows.Forms.GroupBox();
-            this.gbxTransactions = new System.Windows.Forms.GroupBox();
-            this.btnAdjustment = new System.Windows.Forms.Button();
-            this.btnWithdrawal = new System.Windows.Forms.Button();
-            this.btnExpense = new System.Windows.Forms.Button();
-            this.btnPurchase = new System.Windows.Forms.Button();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.gbList.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCustomers)).BeginInit();
             this.gbAcciones.SuspendLayout();
@@ -133,6 +134,7 @@
             this.dgvCustomers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.CustomerID,
             this.Names,
+            this.Login,
             this.PaternalLastname,
             this.MaternalLastname,
             this.Address,
@@ -152,121 +154,6 @@
             this.dgvCustomers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCustomers.Size = new System.Drawing.Size(613, 429);
             this.dgvCustomers.TabIndex = 17;
-            // 
-            // CustomerID
-            // 
-            this.CustomerID.DataPropertyName = "CustomerID";
-            this.CustomerID.HeaderText = "CustomerID";
-            this.CustomerID.Name = "CustomerID";
-            this.CustomerID.ReadOnly = true;
-            this.CustomerID.Visible = false;
-            this.CustomerID.Width = 116;
-            // 
-            // Names
-            // 
-            this.Names.DataPropertyName = "Names";
-            this.Names.HeaderText = "Nombre (s)";
-            this.Names.Name = "Names";
-            this.Names.ReadOnly = true;
-            this.Names.Width = 105;
-            // 
-            // PaternalLastname
-            // 
-            this.PaternalLastname.DataPropertyName = "PaternalLastname";
-            this.PaternalLastname.HeaderText = "Apellido paterno";
-            this.PaternalLastname.Name = "PaternalLastname";
-            this.PaternalLastname.ReadOnly = true;
-            this.PaternalLastname.Width = 139;
-            // 
-            // MaternalLastname
-            // 
-            this.MaternalLastname.DataPropertyName = "MaternalLastname";
-            this.MaternalLastname.HeaderText = "Apellido materno";
-            this.MaternalLastname.Name = "MaternalLastname";
-            this.MaternalLastname.ReadOnly = true;
-            this.MaternalLastname.Width = 141;
-            // 
-            // Address
-            // 
-            this.Address.DataPropertyName = "Address";
-            this.Address.HeaderText = "Dirección";
-            this.Address.Name = "Address";
-            this.Address.ReadOnly = true;
-            this.Address.Width = 101;
-            // 
-            // Phone
-            // 
-            this.Phone.DataPropertyName = "Phone";
-            this.Phone.HeaderText = "Teléfono";
-            this.Phone.Name = "Phone";
-            this.Phone.ReadOnly = true;
-            this.Phone.Width = 97;
-            // 
-            // Cellphone
-            // 
-            this.Cellphone.DataPropertyName = "Cellphone";
-            this.Cellphone.HeaderText = "Celular";
-            this.Cellphone.Name = "Cellphone";
-            this.Cellphone.ReadOnly = true;
-            this.Cellphone.Width = 84;
-            // 
-            // Email
-            // 
-            this.Email.DataPropertyName = "Email";
-            this.Email.HeaderText = "Correo electrónico";
-            this.Email.Name = "Email";
-            this.Email.ReadOnly = true;
-            this.Email.Width = 152;
-            // 
-            // Nickname
-            // 
-            this.Nickname.DataPropertyName = "Nickname";
-            this.Nickname.HeaderText = "Alias";
-            this.Nickname.Name = "Nickname";
-            this.Nickname.ReadOnly = true;
-            this.Nickname.Width = 68;
-            // 
-            // Username
-            // 
-            this.Username.DataPropertyName = "Username";
-            this.Username.HeaderText = "Usuario";
-            this.Username.Name = "Username";
-            this.Username.ReadOnly = true;
-            this.Username.Width = 89;
-            // 
-            // Password
-            // 
-            this.Password.DataPropertyName = "Password";
-            this.Password.HeaderText = "Contraseña";
-            this.Password.Name = "Password";
-            this.Password.ReadOnly = true;
-            this.Password.Visible = false;
-            this.Password.Width = 116;
-            // 
-            // Account
-            // 
-            this.Account.DataPropertyName = "Account";
-            this.Account.HeaderText = "Account";
-            this.Account.Name = "Account";
-            this.Account.ReadOnly = true;
-            this.Account.Visible = false;
-            this.Account.Width = 91;
-            // 
-            // CreatedDate
-            // 
-            this.CreatedDate.DataPropertyName = "CreatedDate";
-            this.CreatedDate.HeaderText = "Fecha de alta";
-            this.CreatedDate.Name = "CreatedDate";
-            this.CreatedDate.ReadOnly = true;
-            this.CreatedDate.Width = 96;
-            // 
-            // ModifiedDate
-            // 
-            this.ModifiedDate.DataPropertyName = "ModifiedDate";
-            this.ModifiedDate.HeaderText = "Fecha Modificado";
-            this.ModifiedDate.Name = "ModifiedDate";
-            this.ModifiedDate.ReadOnly = true;
-            this.ModifiedDate.Width = 146;
             // 
             // btnViewAccount
             // 
@@ -419,6 +306,131 @@
             this.btnPurchase.UseVisualStyleBackColor = false;
             this.btnPurchase.Click += new System.EventHandler(this.btnPurchase_Click);
             // 
+            // CustomerID
+            // 
+            this.CustomerID.DataPropertyName = "CustomerID";
+            this.CustomerID.HeaderText = "CustomerID";
+            this.CustomerID.Name = "CustomerID";
+            this.CustomerID.ReadOnly = true;
+            this.CustomerID.Visible = false;
+            this.CustomerID.Width = 116;
+            // 
+            // Names
+            // 
+            this.Names.DataPropertyName = "Name";
+            this.Names.HeaderText = "Nombre (s)";
+            this.Names.Name = "Names";
+            this.Names.ReadOnly = true;
+            this.Names.Width = 114;
+            // 
+            // Login
+            // 
+            this.Login.DataPropertyName = "Login";
+            this.Login.HeaderText = "Login";
+            this.Login.Name = "Login";
+            this.Login.ReadOnly = true;
+            this.Login.Visible = false;
+            this.Login.Width = 73;
+            // 
+            // PaternalLastname
+            // 
+            this.PaternalLastname.DataPropertyName = "PaternalLastname";
+            this.PaternalLastname.HeaderText = "Apellido paterno";
+            this.PaternalLastname.Name = "PaternalLastname";
+            this.PaternalLastname.ReadOnly = true;
+            this.PaternalLastname.Width = 139;
+            // 
+            // MaternalLastname
+            // 
+            this.MaternalLastname.DataPropertyName = "MaternalLastname";
+            this.MaternalLastname.HeaderText = "Apellido materno";
+            this.MaternalLastname.Name = "MaternalLastname";
+            this.MaternalLastname.ReadOnly = true;
+            this.MaternalLastname.Width = 141;
+            // 
+            // Address
+            // 
+            this.Address.DataPropertyName = "Address";
+            this.Address.HeaderText = "Dirección";
+            this.Address.Name = "Address";
+            this.Address.ReadOnly = true;
+            this.Address.Width = 101;
+            // 
+            // Phone
+            // 
+            this.Phone.DataPropertyName = "Phone";
+            this.Phone.HeaderText = "Teléfono";
+            this.Phone.Name = "Phone";
+            this.Phone.ReadOnly = true;
+            this.Phone.Width = 97;
+            // 
+            // Cellphone
+            // 
+            this.Cellphone.DataPropertyName = "Cellphone";
+            this.Cellphone.HeaderText = "Celular";
+            this.Cellphone.Name = "Cellphone";
+            this.Cellphone.ReadOnly = true;
+            this.Cellphone.Width = 84;
+            // 
+            // Email
+            // 
+            this.Email.DataPropertyName = "Email";
+            this.Email.HeaderText = "Correo electrónico";
+            this.Email.Name = "Email";
+            this.Email.ReadOnly = true;
+            this.Email.Width = 152;
+            // 
+            // Nickname
+            // 
+            this.Nickname.DataPropertyName = "Nickname";
+            this.Nickname.HeaderText = "Alias";
+            this.Nickname.Name = "Nickname";
+            this.Nickname.ReadOnly = true;
+            this.Nickname.Width = 68;
+            // 
+            // Username
+            // 
+            this.Username.DataPropertyName = "Username";
+            this.Username.HeaderText = "Usuario";
+            this.Username.Name = "Username";
+            this.Username.ReadOnly = true;
+            this.Username.Width = 89;
+            // 
+            // Password
+            // 
+            this.Password.DataPropertyName = "Password";
+            this.Password.HeaderText = "Contraseña";
+            this.Password.Name = "Password";
+            this.Password.ReadOnly = true;
+            this.Password.Visible = false;
+            this.Password.Width = 116;
+            // 
+            // Account
+            // 
+            this.Account.DataPropertyName = "Account";
+            this.Account.HeaderText = "Account";
+            this.Account.Name = "Account";
+            this.Account.ReadOnly = true;
+            this.Account.Visible = false;
+            this.Account.Width = 91;
+            // 
+            // CreatedDate
+            // 
+            this.CreatedDate.DataPropertyName = "CreatedDate";
+            this.CreatedDate.HeaderText = "Fecha de alta";
+            this.CreatedDate.Name = "CreatedDate";
+            this.CreatedDate.ReadOnly = true;
+            this.CreatedDate.Width = 96;
+            // 
+            // ModifiedDate
+            // 
+            this.ModifiedDate.DataPropertyName = "ModifiedDate";
+            this.ModifiedDate.HeaderText = "Fecha Modificado";
+            this.ModifiedDate.Name = "ModifiedDate";
+            this.ModifiedDate.ReadOnly = true;
+            this.ModifiedDate.Visible = false;
+            this.ModifiedDate.Width = 146;
+            // 
             // frmCustomerList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -454,8 +466,15 @@
         protected System.Windows.Forms.GroupBox gbAcciones;
         protected System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView dgvCustomers;
+        private System.Windows.Forms.GroupBox gbxTransactions;
+        protected System.Windows.Forms.Button btnWithdrawal;
+        protected System.Windows.Forms.Button btnExpense;
+        protected System.Windows.Forms.Button btnPurchase;
+        protected System.Windows.Forms.Button btnAdjustment;
+        private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.DataGridViewTextBoxColumn CustomerID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Names;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Login;
         private System.Windows.Forms.DataGridViewTextBoxColumn PaternalLastname;
         private System.Windows.Forms.DataGridViewTextBoxColumn MaternalLastname;
         private System.Windows.Forms.DataGridViewTextBoxColumn Address;
@@ -468,11 +487,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Account;
         private System.Windows.Forms.DataGridViewTextBoxColumn CreatedDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn ModifiedDate;
-        private System.Windows.Forms.GroupBox gbxTransactions;
-        protected System.Windows.Forms.Button btnWithdrawal;
-        protected System.Windows.Forms.Button btnExpense;
-        protected System.Windows.Forms.Button btnPurchase;
-        protected System.Windows.Forms.Button btnAdjustment;
-        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
