@@ -37,6 +37,7 @@ namespace DAL
         public LoyaltyDB() : base("LoyaltyDB")
         {
             Database.SetInitializer(new LoyaltyDBInitializer());
+            //Database.SetInitializer(new MigrateDatabaseToLatestVersion<LoyaltyDB, DAL.Migrations.Configuration>());
         }
 
         public DbSet<Manager> Managers { get; set; }

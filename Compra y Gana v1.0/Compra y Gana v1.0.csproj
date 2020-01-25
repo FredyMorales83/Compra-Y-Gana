@@ -198,6 +198,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AuxiliarUtilities\AuxiliarUtilities.csproj">
+      <Project>{599AA0CE-09AE-4F9A-8AA3-5EB505634594}</Project>
+      <Name>AuxiliarUtilities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BLL\BLL.csproj">
       <Project>{eb5b0301-8037-4ecb-8149-442be943f745}</Project>
       <Name>BLL</Name>

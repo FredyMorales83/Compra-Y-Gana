@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AuxiliarUtilities;
 using DAL;
 using Models;
 
@@ -192,8 +193,8 @@ namespace Compra_y_Gana_v1._0
             customer.PaternalLastname = txtPaternalLastname.Text;
             customer.Phone = txtPhone.Text;
             customer.Username = txtUsername.Text;
-            customer.Password = txtPassword.Text;
-            customer.Login = new Login { Username = txtUsername.Text, Password =  txtPassword.Text};
+            customer.Password = RegexUtilities.PasswordEncrypt(txtPassword.Text.Trim());
+            customer.Login = new Login { Username = customer.Username, Password =  customer.Password};
         }
 
         private void FillTextBoxSince(Customer customer)
@@ -204,7 +205,7 @@ namespace Compra_y_Gana_v1._0
             txtMaternalLastname.Text = customer.MaternalLastname;
             txtName.Text = customer.Name;
             txtNickname.Text = customer.Nickname;
-            txtPassword.Text = customer.Password;
+            txtPassword.Text = RegexUtilities.PasswordDecrypt(customer.Password);
             txtPaternalLastname.Text = customer.PaternalLastname;
             txtPhone.Text = customer.Phone;
             txtUsername.Text = customer.Username;

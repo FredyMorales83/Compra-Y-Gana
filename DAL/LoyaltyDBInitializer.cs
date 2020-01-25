@@ -1,4 +1,5 @@
-﻿using Models;
+﻿using AuxiliarUtilities;
+using Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -19,8 +20,8 @@ namespace DAL
                 Name = "Administrador",
                 PaternalLastname = "Predeterminado",
                 Username = "admin",
-                Password = "1234",
-                Login = new Login { Username = "admin", Password = "1234" }
+                Password = RegexUtilities.PasswordEncrypt("1234"),
+                Login = new Login { Username = "admin", Password = RegexUtilities.PasswordEncrypt("1234") }
             };
 
             db.Managers.Add(manager);

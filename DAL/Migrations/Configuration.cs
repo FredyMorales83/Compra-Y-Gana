@@ -1,5 +1,7 @@
 namespace DAL.Migrations
 {
+    using AuxiliarUtilities;
+    using Models;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -14,12 +16,35 @@ namespace DAL.Migrations
             ContextKey = "DAL.LoyaltyDB";
         }
 
-        protected override void Seed(DAL.LoyaltyDB context)
+        protected override void Seed(DAL.LoyaltyDB db)
         {
-            //  This method will be called after migrating to the latest version.
+            Manager manager = new Manager
+            {
+                Nickname = "Admistrador predeterminado",
+                Email = "correo@dominio.com",
+                Name = "Administrador",
+                PaternalLastname = "Predeterminado",
+                Username = "admin",
+                Password = RegexUtilities.PasswordEncrypt("1234"),
+                Login = new Login { Username = "admin", Password = RegexUtilities.PasswordEncrypt("1234") }
+            };
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data.
+            db.Managers.Add(manager);
+            db.SaveChanges();
+
+            ApplicationSetting setting = new ApplicationSetting
+            {
+                BusinessName = "Empresa predeterminada",
+                BusinessAnniversary = new DateTime(1900, 1, 1),
+                RewardDoublePointsOnBusinessAnniversary = false,
+                RewardDoublePointsOnCustomerAnniversary = false,
+                AllowCashRequest = true,
+                PercentagePoints = 10,
+                PointValueCash = 0.1m
+            };
+
+            db.ApplicationSettings.Add(setting);
+            db.SaveChanges();
         }
     }
 }

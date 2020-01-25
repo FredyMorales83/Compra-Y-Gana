@@ -1,4 +1,5 @@
-﻿using DAL;
+﻿using AuxiliarUtilities;
+using DAL;
 using Models;
 using System;
 using System.Collections.Generic;
@@ -14,9 +15,11 @@ namespace BLL
         {
             using (LoyaltyDB db = new LoyaltyDB())
             {
-                var manager = db.Managers.Where(m => m.Login.Username == username && m.Login.Password == password).SingleOrDefault();
+                var manager = db.Managers.Include("Login").Where(m => m.Login.Username == username).SingleOrDefault();
 
-                if (manager != null)
+                var managerPasswordDecrypted = RegexUtilities.PasswordDecrypt(manager.Login.Password);
+
+                if (managerPasswordDecrypted == password)
                 {
                     return manager;
                 }
@@ -52,9 +55,8 @@ namespace BLL
 
 
                 managerToUpdate.Login.Username = manager.Login.Username;
-                managerToUpdate.Login.Password = manager.Login.Password;
+                managerToUpdate.Login.Password = RegexUtilities.PasswordEncrypt(manager.Login.Password);
 
-                //db.Entry(manager).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
             }
         }

@@ -1,4 +1,5 @@
-﻿using Models;
+﻿using AuxiliarUtilities;
+using Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -104,10 +105,10 @@ namespace Compra_y_Gana_v1._0
             txtEmail.Text = manager.Email;
             txtMaternalLastname.Text = manager.MaternalLastname;
             txtName.Text = manager.Name;
-            txtPassword.Text = manager.Login.Password;
             txtPaternalLastname.Text = manager.PaternalLastname;
             txtPhone.Text = manager.Phone;
             txtUsername.Text = manager.Login.Username;
+            txtPassword.Text = RegexUtilities.PasswordDecrypt(manager.Login.Password);
         }
 
         private void AssignDataFromTextBox(ApplicationSetting setting)
