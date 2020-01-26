@@ -192,9 +192,16 @@ namespace Compra_y_Gana_v1._0
             customer.Nickname = txtNickname.Text;
             customer.PaternalLastname = txtPaternalLastname.Text;
             customer.Phone = txtPhone.Text;
-            customer.Username = txtUsername.Text;
-            customer.Password = RegexUtilities.PasswordEncrypt(txtPassword.Text.Trim());
-            customer.Login = new Login { Username = customer.Username, Password =  customer.Password};
+
+            if (IsNewCustomer)
+            {
+                customer.Login = new Login { Username = txtUsername.Text, Password = RegexUtilities.PasswordEncrypt(txtPassword.Text.Trim()) };
+            }
+            else
+            {
+                customer.Login.Username = txtUsername.Text;
+                customer.Login.Password = txtPassword.Text.Trim(); 
+            }
         }
 
         private void FillTextBoxSince(Customer customer)
@@ -205,10 +212,10 @@ namespace Compra_y_Gana_v1._0
             txtMaternalLastname.Text = customer.MaternalLastname;
             txtName.Text = customer.Name;
             txtNickname.Text = customer.Nickname;
-            txtPassword.Text = RegexUtilities.PasswordDecrypt(customer.Password);
             txtPaternalLastname.Text = customer.PaternalLastname;
             txtPhone.Text = customer.Phone;
-            txtUsername.Text = customer.Username;
+            txtUsername.Text = customer.Login.Username;
+            txtPassword.Text = RegexUtilities.PasswordDecrypt(customer.Login.Password);
         }
     }
 }

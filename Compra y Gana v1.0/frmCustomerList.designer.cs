@@ -48,19 +48,19 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.CustomerID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Names = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Login = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PaternalLastname = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MaternalLastname = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Address = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nickname = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Phone = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cellphone = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Nickname = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Username = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Password = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Account = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CreatedDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ModifiedDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Account = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Login = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Address = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbList.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCustomers)).BeginInit();
             this.gbAcciones.SuspendLayout();
@@ -125,7 +125,6 @@
             // 
             this.dgvCustomers.AllowUserToAddRows = false;
             this.dgvCustomers.AllowUserToDeleteRows = false;
-            this.dgvCustomers.AllowUserToOrderColumns = true;
             this.dgvCustomers.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -134,19 +133,19 @@
             this.dgvCustomers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.CustomerID,
             this.Names,
-            this.Login,
             this.PaternalLastname,
             this.MaternalLastname,
-            this.Address,
+            this.Nickname,
+            this.Email,
             this.Phone,
             this.Cellphone,
-            this.Email,
-            this.Nickname,
             this.Username,
             this.Password,
-            this.Account,
             this.CreatedDate,
-            this.ModifiedDate});
+            this.ModifiedDate,
+            this.Account,
+            this.Login,
+            this.Address});
             this.dgvCustomers.Location = new System.Drawing.Point(15, 71);
             this.dgvCustomers.MultiSelect = false;
             this.dgvCustomers.Name = "dgvCustomers";
@@ -323,15 +322,6 @@
             this.Names.ReadOnly = true;
             this.Names.Width = 114;
             // 
-            // Login
-            // 
-            this.Login.DataPropertyName = "Login";
-            this.Login.HeaderText = "Login";
-            this.Login.Name = "Login";
-            this.Login.ReadOnly = true;
-            this.Login.Visible = false;
-            this.Login.Width = 73;
-            // 
             // PaternalLastname
             // 
             this.PaternalLastname.DataPropertyName = "PaternalLastname";
@@ -348,13 +338,21 @@
             this.MaternalLastname.ReadOnly = true;
             this.MaternalLastname.Width = 141;
             // 
-            // Address
+            // Nickname
             // 
-            this.Address.DataPropertyName = "Address";
-            this.Address.HeaderText = "Dirección";
-            this.Address.Name = "Address";
-            this.Address.ReadOnly = true;
-            this.Address.Width = 101;
+            this.Nickname.DataPropertyName = "Nickname";
+            this.Nickname.HeaderText = "Alias";
+            this.Nickname.Name = "Nickname";
+            this.Nickname.ReadOnly = true;
+            this.Nickname.Width = 68;
+            // 
+            // Email
+            // 
+            this.Email.DataPropertyName = "Email";
+            this.Email.HeaderText = "Correo electrónico";
+            this.Email.Name = "Email";
+            this.Email.ReadOnly = true;
+            this.Email.Width = 152;
             // 
             // Phone
             // 
@@ -372,28 +370,13 @@
             this.Cellphone.ReadOnly = true;
             this.Cellphone.Width = 84;
             // 
-            // Email
-            // 
-            this.Email.DataPropertyName = "Email";
-            this.Email.HeaderText = "Correo electrónico";
-            this.Email.Name = "Email";
-            this.Email.ReadOnly = true;
-            this.Email.Width = 152;
-            // 
-            // Nickname
-            // 
-            this.Nickname.DataPropertyName = "Nickname";
-            this.Nickname.HeaderText = "Alias";
-            this.Nickname.Name = "Nickname";
-            this.Nickname.ReadOnly = true;
-            this.Nickname.Width = 68;
-            // 
             // Username
             // 
             this.Username.DataPropertyName = "Username";
             this.Username.HeaderText = "Usuario";
             this.Username.Name = "Username";
             this.Username.ReadOnly = true;
+            this.Username.Visible = false;
             this.Username.Width = 89;
             // 
             // Password
@@ -405,21 +388,13 @@
             this.Password.Visible = false;
             this.Password.Width = 116;
             // 
-            // Account
-            // 
-            this.Account.DataPropertyName = "Account";
-            this.Account.HeaderText = "Account";
-            this.Account.Name = "Account";
-            this.Account.ReadOnly = true;
-            this.Account.Visible = false;
-            this.Account.Width = 91;
-            // 
             // CreatedDate
             // 
             this.CreatedDate.DataPropertyName = "CreatedDate";
             this.CreatedDate.HeaderText = "Fecha de alta";
             this.CreatedDate.Name = "CreatedDate";
             this.CreatedDate.ReadOnly = true;
+            this.CreatedDate.Visible = false;
             this.CreatedDate.Width = 96;
             // 
             // ModifiedDate
@@ -430,6 +405,32 @@
             this.ModifiedDate.ReadOnly = true;
             this.ModifiedDate.Visible = false;
             this.ModifiedDate.Width = 146;
+            // 
+            // Account
+            // 
+            this.Account.DataPropertyName = "Account";
+            this.Account.HeaderText = "Account";
+            this.Account.Name = "Account";
+            this.Account.ReadOnly = true;
+            this.Account.Visible = false;
+            this.Account.Width = 91;
+            // 
+            // Login
+            // 
+            this.Login.DataPropertyName = "Login";
+            this.Login.HeaderText = "Login";
+            this.Login.Name = "Login";
+            this.Login.ReadOnly = true;
+            this.Login.Visible = false;
+            this.Login.Width = 73;
+            // 
+            // Address
+            // 
+            this.Address.DataPropertyName = "Address";
+            this.Address.HeaderText = "Dirección";
+            this.Address.Name = "Address";
+            this.Address.ReadOnly = true;
+            this.Address.Width = 101;
             // 
             // frmCustomerList
             // 
@@ -474,18 +475,18 @@
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.DataGridViewTextBoxColumn CustomerID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Names;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Login;
         private System.Windows.Forms.DataGridViewTextBoxColumn PaternalLastname;
         private System.Windows.Forms.DataGridViewTextBoxColumn MaternalLastname;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Address;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nickname;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Email;
         private System.Windows.Forms.DataGridViewTextBoxColumn Phone;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cellphone;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Email;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Nickname;
         private System.Windows.Forms.DataGridViewTextBoxColumn Username;
         private System.Windows.Forms.DataGridViewTextBoxColumn Password;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Account;
         private System.Windows.Forms.DataGridViewTextBoxColumn CreatedDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn ModifiedDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Account;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Login;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Address;
     }
 }

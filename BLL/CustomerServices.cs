@@ -1,4 +1,5 @@
-﻿using DAL;
+﻿using AuxiliarUtilities;
+using DAL;
 using Models;
 using System;
 using System.Collections.Generic;
@@ -22,8 +23,6 @@ namespace BLL
                     Email = Correo,
                     MaternalLastname = ApellidoMaterno,
                     Name = Nombre,
-                    Username = Usuario,
-                    Password = Contrasena,
                     PaternalLastname = ApellidoPaterno,
                     Phone = Telefono,
                     CreatedDate = DateTime.Now,
@@ -38,7 +37,7 @@ namespace BLL
 
             using (LoyaltyDB db = new LoyaltyDB())
             {
-                list = db.Customers.ToList();
+                list = db.Customers.Include("Login").ToList();
             }
 
             return list;
@@ -58,7 +57,10 @@ namespace BLL
             using (LoyaltyDB db = new LoyaltyDB())
             {
                 customer.ModifiedDate = DateTime.Now;
+                var newPassword = RegexUtilities.PasswordEncrypt(customer.Login.Password);
+                LoginServices.UpdateEntityLogin(customer.Login.LoginId, newPassword);
                 db.Entry(customer).State = System.Data.Entity.EntityState.Modified;
+
                 db.SaveChanges();
             }
         }
@@ -80,11 +82,28 @@ namespace BLL
             return null;
         }
 
+        public static Customer GetCustomerById(int customerID)
+        {
+            using (LoyaltyDB db = new LoyaltyDB())
+            {
+                Customer customer = db.Customers.Include("Login").Where(m => m.CustomerID == customerID).SingleOrDefault();
+
+                if (customer != null)
+                {
+                    return customer;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
         public static bool UsernameExists(string username)
         {
             using (LoyaltyDB db = new LoyaltyDB())
             {
-                Customer customer = db.Customers.Where(u => u.Username == username).SingleOrDefault();
+                Customer customer = db.Customers.Where(u => u.Login.Username == username).SingleOrDefault();
 
                 if (customer != null)
                 {

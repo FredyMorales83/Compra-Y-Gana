@@ -50,12 +50,10 @@ namespace BLL
         public static void Update(Manager manager)
         {
             using (LoyaltyDB db = new LoyaltyDB())
-            {
-                var managerToUpdate = db.Managers.Include("Login").Where(m => m.ManagerID == manager.ManagerID).SingleOrDefault();
-
-
-                managerToUpdate.Login.Username = manager.Login.Username;
-                managerToUpdate.Login.Password = RegexUtilities.PasswordEncrypt(manager.Login.Password);
+            {                
+                var newPassword = RegexUtilities.PasswordEncrypt(manager.Login.Password);
+                LoginServices.UpdateEntityLogin(manager.Login.LoginId, newPassword);
+                db.Entry<Manager>(manager).State = System.Data.Entity.EntityState.Modified;
 
                 db.SaveChanges();
             }

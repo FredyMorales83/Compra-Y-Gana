@@ -30,19 +30,22 @@ namespace DAL
         //Descomentar para usar BD SQL Server local de pruebas
         //public LoyaltyDB() : base("MSCloudDB")
         //{
-        //    Database.SetInitializer(new LoyaltyDBInitializer());
+        //    //Database.SetInitializer(new LoyaltyDBInitializer());
+        //    Database.SetInitializer(new MigrateDatabaseToLatestVersion<LoyaltyDB, DAL.Migrations.Configuration>());
         //}
 
         //Descomentar para usar BD SQL Server local de pruebas
         public LoyaltyDB() : base("LoyaltyDB")
         {
-            Database.SetInitializer(new LoyaltyDBInitializer());
-            //Database.SetInitializer(new MigrateDatabaseToLatestVersion<LoyaltyDB, DAL.Migrations.Configuration>());
+            //Database.SetInitializer(new LoyaltyDBInitializer());
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<LoyaltyDB, DAL.Migrations.Configuration>());
         }
 
         public DbSet<Manager> Managers { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Account> Accounts { get; set; }
+
+        public DbSet<Login> Logins { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
         public DbSet<ApplicationSetting> ApplicationSettings { get; set; }
 

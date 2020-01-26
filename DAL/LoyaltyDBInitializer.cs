@@ -19,8 +19,6 @@ namespace DAL
                 Email = "correo@dominio.com",
                 Name = "Administrador",
                 PaternalLastname = "Predeterminado",
-                Username = "admin",
-                Password = RegexUtilities.PasswordEncrypt("1234"),
                 Login = new Login { Username = "admin", Password = RegexUtilities.PasswordEncrypt("1234") }
             };
 

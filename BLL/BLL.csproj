@@ -51,6 +51,7 @@
     <Compile Include="AccountServices.cs" />
     <Compile Include="ApplicationSettingServices.cs" />
     <Compile Include="CustomerServices.cs" />
+    <Compile Include="LoginServices.cs" />
     <Compile Include="TransactionServices.cs" />
     <Compile Include="ManagerServices.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

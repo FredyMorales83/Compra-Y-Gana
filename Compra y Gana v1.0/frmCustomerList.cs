@@ -69,7 +69,7 @@ namespace Compra_y_Gana_v1._0
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            Customer customer = BLL.CustomerServices.FindById(Int32.Parse(dgvCustomers.CurrentRow.Cells["CustomerID"].Value.ToString())); 
+            Customer customer = BLL.CustomerServices.GetCustomerById(Int32.Parse(dgvCustomers.CurrentRow.Cells["CustomerID"].Value.ToString())); 
 
             frmNewOrUpdateCustomer frm = new frmNewOrUpdateCustomer(customer);
             frm.Text = "Editar cliente";
