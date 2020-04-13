@@ -59,7 +59,7 @@ namespace Compra_y_Gana_v1._0
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            frmLogin  frm = new frmLogin();
+            frmLogin frm = new frmLogin();
             frm.ShowDialog();
 
             if (Properties.Settings.Default.UserID == 0)

@@ -1,4 +1,5 @@
 ﻿using Models;
+using Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,7 +15,8 @@ namespace Compra_y_Gana_v1._0
 {
     public partial class frmCustomerAccount : Form
     {
-        public Customer customer { get; set; }
+        private Customer customer { get; set; }
+        private AccountDetailsViewModel accountDetails;
         private int MonthPeriod;
 
         public frmCustomerAccount(Customer customer)
@@ -23,9 +25,11 @@ namespace Compra_y_Gana_v1._0
             FillTextBoxSince(customer);
             this.customer = customer;
 
+            accountDetails = BLL.AccountServices.GetAccountDetails(customer);
+
             var account = BLL.AccountServices.FindById(customer.CustomerID);
-            txtAccumulatedPoints.Text = account.CurrentPointsBalance.ToString();
-            txtCashEquivalents.Text = (account.CurrentPointsBalance * Properties.Settings.Default.PointValueCash).ToString("C4");
+            txtAccumulatedPoints.Text = accountDetails.AccumulatedPoints.ToString();
+            txtCashEquivalents.Text = accountDetails.CashEquivalent.ToString("C4");
         }        
 
         private void frmCustomerAccount_Load(object sender, EventArgs e)
@@ -38,9 +42,8 @@ namespace Compra_y_Gana_v1._0
         {
             try
             {
-                ICollection<Transaction> transactions = BLL.TransactionServices.GetAccountTransactions(customer.CustomerID, date);
-
-                var movements = from t in transactions select new TransactionViewModel { ID = t.TransactionID, Fecha = t.TransactionDate, Descripcion =  t.Description, Transaccion = TranslateTransactionType(t.TransactionType), Monto = t.Amount.ToString("C2"), Notas = t.Notes };
+                var movements = from t in accountDetails.Transactions where (t.TransactionDate.Month == date.Month && t.TransactionDate.Year == date.Year) 
+                                select new TransactionViewModel { ID = t.TransactionID, Fecha = t.TransactionDate, Descripcion =  t.Description, Transaccion = TranslateTransactionType(t.TransactionType), Monto = t.Amount.ToString("C2"), Notas = t.Notes };
 
                 dgvTransactions.DataSource = movements.ToList();                
                 dgvTransactions.Columns["Notas"].Visible = false;
@@ -57,13 +60,13 @@ namespace Compra_y_Gana_v1._0
         {
             switch (transactionType)
             {
-                case Models.TransactionType.Purchase:
+                case TransactionType.Purchase:
                     return "Compra";
-                case Models.TransactionType.Expense:
+                case TransactionType.Expense:
                     return "Gasto";
-                case Models.TransactionType.Withdrawal:
+                case TransactionType.Withdrawal:
                     return "Retiro";
-                case Models.TransactionType.Adjustment:
+                case TransactionType.Adjustment:
                     return "Ajuste";
                 default:
                     throw new TypeAccessException("Tipo de transacción desconocida");
@@ -116,15 +119,5 @@ namespace Compra_y_Gana_v1._0
             frmTransactions frm = new frmTransactions(customer, transaccion.ID);
             frm.ShowDialog();
         }
-    }
-
-    public class TransactionViewModel
-    {
-        public int ID { get; set; }
-        public DateTime Fecha { get; set; }
-        public string Descripcion { get; set; }
-        public string Transaccion { get; set; }
-        public string Monto { get; set; }
-        public string Notas { get; set; }
     }
 }

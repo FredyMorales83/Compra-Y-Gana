@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace DAL
 {
     //Descomentar para utilizar con bases de datos MySql
-    [DbConfigurationType(typeof(MySqlEFConfiguration))]
+    //[DbConfigurationType(typeof(MySqlEFConfiguration))]
     public class LoyaltyDB : DbContext
     {
         //Descomentar para usar BD MySql en la nube, requiere configurar la cadena de conexion con sus datos
@@ -23,11 +23,11 @@ namespace DAL
         //}
 
         //Descomentar para usar BD MySql local de pruebas
-        public LoyaltyDB() : base(GetConnectionString("LoyaltyDB", "LocalDB"))
-        {
-            //Database.SetInitializer(new LoyaltyDBInitializer());
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<LoyaltyDB, DAL.Migrations.Configuration>());
-        }
+        //public LoyaltyDB() : base(GetConnectionString("LoyaltyDB", "LocalDB"))
+        //{
+        //    //Database.SetInitializer(new LoyaltyDBInitializer());
+        //    Database.SetInitializer(new MigrateDatabaseToLatestVersion<LoyaltyDB, DAL.Migrations.Configuration>());
+        //}
 
         //Descomentar para usar BD SQL Server local de pruebas
         //public LoyaltyDB() : base("MSCloudDB")
@@ -37,11 +37,11 @@ namespace DAL
         //}
 
         //Descomentar para usar BD SQL Server local de pruebas
-        //public LoyaltyDB() : base("LoyaltyDB")
-        //{
-        //    //Database.SetInitializer(new LoyaltyDBInitializer());
-        //    Database.SetInitializer(new MigrateDatabaseToLatestVersion<LoyaltyDB, DAL.Migrations.Configuration>());
-        //}
+        public LoyaltyDB() : base("LoyaltyDB")
+        {
+            //Database.SetInitializer(new LoyaltyDBInitializer());
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<LoyaltyDB, DAL.Migrations.Configuration>());
+        }
 
         public DbSet<Manager> Managers { get; set; }
         public DbSet<Customer> Customers { get; set; }

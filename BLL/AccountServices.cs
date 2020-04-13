@@ -1,7 +1,9 @@
 ﻿using DAL;
 using Models;
+using Models.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -67,6 +69,28 @@ namespace BLL
         public static void Deposit(Account account, decimal amountOfPointsToDeposit)
         {
             UpdateCurrentPointsBalance(account, amountOfPointsToDeposit);
+        }
+
+        public static AccountDetailsViewModel GetAccountDetails(Customer customer)
+        {
+            using (LoyaltyDB db = new LoyaltyDB())
+            {
+                var account = db.Accounts.Include("Transactions").Where(a => a.CustomerID == customer.CustomerID).FirstOrDefault();
+
+                var customerAccountDetails = new AccountDetailsViewModel
+                {
+                    CustomerFullname = customer.ToString(),
+                    AccountNumber = account.CustomerID.ToString(),
+                    Email = customer.Email,
+                    Address = customer.Address,
+                    ActualPeriod = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(DateTime.Now.Month),
+                    Transactions = account.Transactions,
+                    AccumulatedPoints = account.CurrentPointsBalance,
+                    CashEquivalent = account.CurrentMoneyBalance
+                };
+
+                return customerAccountDetails;
+            }            
         }
     }
 }
