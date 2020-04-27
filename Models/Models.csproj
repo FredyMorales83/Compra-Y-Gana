@@ -59,6 +59,7 @@
     <Compile Include="Transaction.cs" />
     <Compile Include="Manager.cs" />
     <Compile Include="ViewModels\AccountDetailsViewModel.cs" />
+    <Compile Include="ViewModels\LoginMeViewModel.cs" />
     <Compile Include="ViewModels\TransactionViewModel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>Compra Y Gana con Computadoras y Accesorios M&amp;M</h1>
+    <p class="lead">Es nuestro programa de lealtad para premiar la fidelidad de nuestros clientes, en el cual a través de sus compras obtienen puntos que podrán cambiar por diversos premios y/o productos.</p>
+    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Ingresar a mi cuenta</h2>
+        <p class="text-justify">
+            Inicie sesión para consultar su estado de cuenta y ver la cantidad de puntos obtenidos, sus transacciones realizadas y puntos redimidos por premios o productos.
+        </p><p class="text-hide">Este texto no se  mostrara simplemente es para igualar la alineacion de los botones</p>
+        <p class="text-hide">Este texto no se  mostrara simplemente es para igualar la alineacion de los botones</p>
+        <p>@Html.ActionLink("Iniciar sesión »", "Login", "Account", routeValues: null, htmlAttributes: new { @class = "btn btn-default", id = "loginLink" })</p>
+    </div>
+    <div class="col-md-4">
+        <h2>Catálogo de premios</h2>
+        <p class="text-justify">
+        En esta sección podrá consultar los productos que tenemos disponibles para canjear sus puntos, en cada uno de ellos se indica la cantidad de puntos necesarios para realizar el canje.</p>
+        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Mis otros sitios</h2>
+        <p>En esta secci&oacute;n encontrar&aacute; la lista de negocios afiliados a nuestro programa de lealtad, quienes participan de igual manera otorgando puntos por sus compras.</p>
+        <p class="text-hide">Este texto no se  mostrara simplemente es para igualar la alineacion de los botones</p>
+        <p class="text-hide">Este texto no se  mostrara simplemente es para igualar la alineacion de los botones</p>
+        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Ver afiliados &raquo;</a></p>
+    </div>
+</div>

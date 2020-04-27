@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+//using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace BLL
 {
@@ -43,14 +44,40 @@ namespace BLL
             return list;
         }
 
+        public static Customer GetCustomerLogin(string username, string password)
+        {
+            using (LoyaltyDB db = new LoyaltyDB())
+            {
+                var customer = db.Customers.Include("Login").Where(m => m.Login.Username == username).SingleOrDefault();
+
+                var managerPasswordDecrypted = RegexUtilities.PasswordDecrypt(customer.Login.Password);
+
+                if (managerPasswordDecrypted == password)
+                {
+                    return customer;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
         public static void AddNew(Customer customer)
         {
             using (LoyaltyDB db = new LoyaltyDB())
             {
+                //db.Database.ExecuteSqlCommand("insert into NetUsers(Email, UserName) values (@p0, @p1)", customer.Email, customer.Email);
                 db.Customers.Add(customer);
                 db.SaveChanges();
             }
         }
+
+        //public async Task<bool> VerifyUserNamePassword(string userName, string password)
+        //{
+        //    var usermanager = new UserManager<IdentityUser>(new UserStore<IdentityUser>(new IdentityDbContext()));
+        //    return await usermanager.FindAsync(userName, password) != null;
+        //}
 
         public static void Update(Customer customer)
         {

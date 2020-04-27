@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLL", "BLL\BLL.csproj", "{E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuxiliarUtilities", "AuxiliarUtilities\AuxiliarUtilities.csproj", "{599AA0CE-09AE-4F9A-8AA3-5EB505634594}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompraGanaWeb", "CompraGanaWeb\CompraGanaWeb.csproj", "{BD7663F3-F071-4A7B-B62D-009E776A1669}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{599AA0CE-09AE-4F9A-8AA3-5EB505634594}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{599AA0CE-09AE-4F9A-8AA3-5EB505634594}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{599AA0CE-09AE-4F9A-8AA3-5EB505634594}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD7663F3-F071-4A7B-B62D-009E776A1669}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD7663F3-F071-4A7B-B62D-009E776A1669}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD7663F3-F071-4A7B-B62D-009E776A1669}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD7663F3-F071-4A7B-B62D-009E776A1669}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

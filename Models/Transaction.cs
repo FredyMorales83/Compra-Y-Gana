@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -21,13 +22,16 @@ namespace Models
         public int UserID { get; set; }
         
         [DataType(DataType.DateTime)]
+        [DisplayName("Fecha")]
         public DateTime TransactionDate { get; set; } = DateTime.Now;
 
         [MaxLength(100)]
         [Required]
+        [DisplayName("Descripción")]
         public string Description { get; set; }
 
         [Required]
+        [DisplayName("Transacción")]
         public TransactionType TransactionType { get; set; }
 
         [MaxLength(500)]
@@ -35,6 +39,7 @@ namespace Models
 
         [Required]
         [DataType(DataType.Currency)]
+        [DisplayName("Monto")]
         public decimal Amount { get; set; }
 
         public virtual Manager User { get; set; }

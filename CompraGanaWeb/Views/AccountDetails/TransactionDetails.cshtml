@@ -1,0 +1,47 @@
+﻿@model Models.ViewModels.TransactionViewModel
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fecha)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Transaccion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Transaccion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Monto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Monto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Notas)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Notas)
+        </dd>
+
+    </dl>
+</div>
