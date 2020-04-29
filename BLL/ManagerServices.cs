@@ -17,11 +17,18 @@ namespace BLL
             {
                 var manager = db.Managers.Include("Login").Where(m => m.Login.Username == username).SingleOrDefault();
 
-                var managerPasswordDecrypted = RegexUtilities.PasswordDecrypt(manager.Login.Password);
-
-                if (managerPasswordDecrypted == password)
+                if (manager != null)
                 {
-                    return manager;
+                    var managerPasswordDecrypted = RegexUtilities.PasswordDecrypt(manager.Login.Password);
+
+                    if (managerPasswordDecrypted == password)
+                    {
+                        return manager;
+                    }
+                    else
+                    {
+                        return null;
+                    }
                 }
                 else
                 {
