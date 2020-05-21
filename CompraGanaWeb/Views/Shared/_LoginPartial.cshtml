@@ -1,22 +1,50 @@
 ﻿@using Microsoft.AspNet.Identity
-@if (Request.IsAuthenticated)
+@using Models
+
+@*@if (Request.IsAuthenticated)
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
-    @Html.AntiForgeryToken()
+        @Html.AntiForgeryToken()
 
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                @Html.ActionLink("Hola " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+            </li>
+            <li><a href="javascript:document.getElementById('logoutForm').submit()">Cerrar sesión</a></li>
+        </ul>
+    }
+}
+else
+{
     <ul class="nav navbar-nav navbar-right">
-        <li>
-            @Html.ActionLink("Hola " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
-        </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">Cerrar sesión</a></li>
+        <li>@Html.ActionLink("Iniciar sesión", "LoginMe", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
     </ul>
+}*@
+
+@if (Session.Keys.Count != 0)
+{
+    using (Html.BeginForm("LogOut", "AccountDetails", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                @{ 
+
+                    var customer = (Customer)Session["customer"];
+
+                    @Html.ActionLink("Hola " + customer.ToString() + "!", "Index", "AccountDetails", routeValues: null, htmlAttributes: new { title = "Manage" })
+                }
+            </li>
+            <li><a href="javascript:document.getElementById('logoutForm').submit()">Cerrar sesión</a></li>
+        </ul>
     }
 }
 else
 {
     <ul class="nav navbar-nav navbar-right">
         @*<li>@Html.ActionLink("Registrarse", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>*@
-        <li>@Html.ActionLink("Iniciar sesión", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        <li>@Html.ActionLink("Iniciar sesión", "LoginMe", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
     </ul>
 }

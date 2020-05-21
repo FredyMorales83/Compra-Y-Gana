@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using CompraGanaWeb.Models;
 using Models.ViewModels;
+using System.Collections.Generic;
 
 namespace CompraGanaWeb.Controllers
 {
@@ -93,7 +94,7 @@ namespace CompraGanaWeb.Controllers
         }
 
         //
-        // GET: /Account/Login
+        // GET: /Account/LoginMe
         [AllowAnonymous]
         public ActionResult LoginMe(string returnUrl)
         {
@@ -106,7 +107,7 @@ namespace CompraGanaWeb.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> LoginMe(LoginMeViewModel model, string returnUrl)
+        public ActionResult LoginMe(LoginMeViewModel model, string returnUrl)
         {
             if (!ModelState.IsValid)
             {
@@ -117,27 +118,24 @@ namespace CompraGanaWeb.Controllers
 
             if (customer != null)
             {
-                return RedirectToAction("Index", "AccountDetails", new { customerID = customer.CustomerID });
+                Session["customer"] = customer;
+
+                return RedirectToAction("Index", "AccountDetails");
             }
 
+            ModelState.AddModelError("", "Intento de inicio de sesión no válido.");
             return View(model);
+        }        
 
-            // No cuenta los errores de inicio de sesión para el bloqueo de la cuenta
-            // Para permitir que los errores de contraseña desencadenen el bloqueo de la cuenta, cambie a shouldLockout: true
-            //var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-            //switch (result)
-            //{
-            //    case SignInStatus.Success:
-            //        return RedirectToLocal(returnUrl);
-            //    case SignInStatus.LockedOut:
-            //        return View("Lockout");
-            //    case SignInStatus.RequiresVerification:
-            //        return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-            //    case SignInStatus.Failure:
-            //    default:
-            //        ModelState.AddModelError("", "Intento de inicio de sesión no válido.");
-            //        return View(model);
-            //}
+        //
+        // POST: /Account/LogOut
+        //[HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult LogOut()
+        {
+            Session.Clear();
+            
+            return RedirectToAction("Index", "Home");
         }
 
         //
@@ -432,7 +430,7 @@ namespace CompraGanaWeb.Controllers
 
             ViewBag.ReturnUrl = returnUrl;
             return View(model);
-        }
+        }        
 
         //
         // POST: /Account/LogOff

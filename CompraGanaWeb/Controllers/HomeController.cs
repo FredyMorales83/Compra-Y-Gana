@@ -15,7 +15,7 @@ namespace CompraGanaWeb.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Acerca de nuestro programa de lealtad";
 
             return View();
         }

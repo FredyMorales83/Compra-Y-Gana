@@ -12,17 +12,24 @@ namespace CompraGanaWeb.Controllers
 {
     public class AccountDetailsController : Controller
     {
-        //[Authorize]
         // GET: AccountDetails
-        public ActionResult Index(int customerID)
+        public ActionResult Index()
         {
-            //var customer = BLL.CustomerServices.GetAll()./*Where(c => c.CustomerID == 2).*/FirstOrDefault();
-            var customer = BLL.CustomerServices.FindById(customerID);
+            Customer customer = (Customer)Session["customer"];
 
-            var customerAccount = BLL.AccountServices.GetAccountDetails(customer);
+            if (customer != null)
+            {
+                customer = BLL.CustomerServices.FindById(customer.CustomerID);
 
-            return View(customerAccount);
-        }
+                var customerAccount = BLL.AccountServices.GetAccountDetails(customer);
+
+                return View(customerAccount); 
+            }
+            else
+            {
+                return View();
+            }
+        }        
 
         // GET: AccountDetails/Details/5
         [HttpPost]
@@ -40,6 +47,16 @@ namespace CompraGanaWeb.Controllers
             };
 
             return PartialView("TransactionDetails", transactionViewModel);
+        }
+
+        //
+        // GET: /Account/LogOut
+        [ValidateAntiForgeryToken]
+        public ActionResult LogOut()
+        {
+            Session.Clear();
+
+            return RedirectToAction("Index", "Home");
         }
 
         // GET: AccountDetails/Details/5
